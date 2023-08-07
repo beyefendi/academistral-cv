@@ -7,6 +7,12 @@
 
 ## Sample
 
+- To generate Education section, it uses following latex
+
+<p align="center">
+    <img alt="ss-latex" src="https://github.com/beyefendi/academistral-cv/assets/7609852/fb33c80f-b3e2-4794-aa4f-7cde7ecabbb3" width="400">
+    <img alt="ss-view" src="https://github.com/beyefendi/academistral-cv/assets/7609852/c85ab046-4c9a-4c01-a3fd-3da6ca059ffa" width="400">
+</p>
 
 ## Documentation
 
