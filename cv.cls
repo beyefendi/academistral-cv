@@ -1,11 +1,8 @@
-%-------------------------
-% Academistrial Resume Template
-% Author: Emre Süren
-% Credit: Inspired by many CV templates on GitHub
-%------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{cv}[2023-08-10 v0.1 Resume class]
+\LoadClass[11pt,letterpaper]{article} % Font size and paper type
 
-\documentclass[letterpaper,11pt]{article}
-
+%---------- PACKAGES ----------
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
@@ -35,9 +32,15 @@
 % \usepackage{CormorantGaramond}
 % \usepackage{charter}
 
+% Georgia
+% \usepackage[T1]{fontenc}
+% \fontfamily{georgia}\selectfont
+
+% \pdfmapfile{+winfonts.map}
+% \renewcommand\rmdefault{trebuchet}
 
 %---------- PAGE LAYOUT ----------
-\pagestyle{fancy}
+\pagestyle{fancy} % fancy | emptys
 \fancyhf{} % clear all header and footer fields
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
@@ -61,70 +64,64 @@
     \vspace{-4pt}\scshape\raggedright\large}
     {}{0em}{}[\color{black}\titlerule \vspace{-2pt}]
 
-% Ensure that generate pdf is machine readable/ATS parsable
+% Ensure that generated pdf is machine readable/ATS parsable
 \pdfgentounicode=1
 
 %---------- CUSTOM COMMANDS FOR SECTIONS ----------
 
-% #1: Title #2: Year
-\newcommand{\titleYear}[2]{
-    % \vspace{-2pt}
-    \item
-    \begin{tabular*}{0.97\linewidth}{l@{\extracolsep{\fill}}r}
-      #1 & \textit{\small #2}
-    \end{tabular*}%\vspace{-7pt}
-}
-% #1: Title #2: Link #3: Year 
-\newcommand{\titleLinkYear}[3]{
-    % \vspace{-2pt}
-    \item
-    \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
-        #1 \small{\href{#2}{\faLink}} & \textit{\small #3}
-    \end{tabular*}%\vspace{-7pt}
+\newcommand{\isEmptyLink}[1]{%
+    \ifthenelse{ \equal{#1}{} }
+    {%
+    
+    }%
+    {%
+    \small{\href{#1}{\faLink}}
+    }%
 }
 
-% #1: Title #2: Year #3: Organization
-\newcommand{\titleYearOrg}[3]{
+\newcommand{\isEmptyRole}[1]{%
+    \ifthenelse{ \equal{#1}{} }
+    {%
+    \vspace{-13pt}
+    }%
+    {%
+    \textit{\small#1}
+    }%
+}
+
+\newcommand{\isEmptyPlace}[1]{%
+    \ifthenelse{ \equal{#1}{} }
+    {%
+    
+    }%
+    {%
+    \small \faMapMarker \hspace{.5pt} #1
+    }%
+}
+
+% #1: Title #2: Link #3: Year #4: Role # Place
+\newcommand{\titleLinkYearRolePlace}[5]{%
     %\vspace{-2pt}
     \item
     \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
-        #1 & \textit{\small #2} \\
-        \textit{\small#3}
+        #1 \isEmptyLink{#2} & \textit{\small #3} \\%
+        \isEmptyRole{#4} & \isEmptyPlace{#5}%
     \end{tabular*}%\vspace{-7pt}
 }
 
-% #1: Title #2: Year #3: Organization #4: Place
-\newcommand{\titleYearOrgPlace}[4]{
-    %\vspace{-2pt}
-    \item
-    \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
-        #1 & \textit{\small #2} \\
-        \textit{\small#3} & \textit{\small #4}
-    \end{tabular*}%\vspace{-7pt}
-}
-
-% #1: Title #2: Link #3: Year #4: Role
-\newcommand{\titleLinkYearRole}[4]{
-    %\vspace{-2pt}
-    \item
-    \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
-        #1 \small{\href{#2}{\faLink}} & \textit{\small #3} \\
-        \textit{\small#4}
-    \end{tabular*}%\vspace{-7pt}
-}
 
 % #1: (Bold) Title #2: Year #3: Organization #4: Link #5: Place
-\newcommand{\bTitleYearOrgLinkPlace}[5]{
+\newcommand{\bTitleYearOrgLinkPlace}[5]{%
     %\vspace{-2pt}
     \item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\small #2} \\
-        \textit{\small#3} \small{\href{#4}{\faLink}} & \small \faMapMarker \hspace{.5pt} #5
-    \end{tabular*}%\vspace{0pt}
+    \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\small #3}\\%
+        \isEmptyRole{#4}\isEmptyLink{#2} & \isEmptyPlace{#5}%
+    \end{tabular*}%\vspace{-7pt}
 }
 
 % #1: Authors #2: Paper #3: Journal #4: Pages #5: Year
-\newcommand{\publicationsItem}[5]{
+\newcommand{\publicationsItem}[5]{%
     % \vspace{-2pt}
     \item
     {#1 \textit{#2} \ul{#3}#4\textit{#5}}
@@ -132,7 +129,7 @@
 }
 
 % #1: Title #2: Year #3: Agency #4: Amount  # 7:Role #8: Objective @TODO
-\newcommand{\fundingItem}[9]{
+\newcommand{\fundingItem}[9]{%
     %\vspace{-2pt}
     \item
     \begin{tabular*}{0.97\textwidth}[t]{p{0.85\linewidth}@{\extracolsep{\fill}}r}
@@ -149,22 +146,22 @@
 }
 
 % #1: Title #2: Year
-\newcommand{\teachingItem}[2]{
+\newcommand{\teachingItem}[2]{%
     %\vspace{-2pt}
     \item
     \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
-        #1 & \textit{\small #2}
+        #1 & \textit{\small #2}%
     \end{tabular*}%\vspace{-7pt}
 }
 
 % #1: Name #2: Title #3: E-mail #4: Organization 
-\newcommand{\referenceItem}[4]{
+\newcommand{\referenceItem}[4]{%
     \vspace{-2pt}
     \begin{tabular}{0.97\textwidth}
-        #1, \emph{#2} \small{\href{mailto:#3}{\faEnvelope}} \\
-        \small #4
-    \end{tabular}\vspace{0pt}
-    \quad
+        #1, \emph{#2} \small{\href{mailto:#3}{\faEnvelope}} \\%
+        \small #4%
+    \end{tabular}\vspace{0pt}%
+    \quad%
 }
 
 % Takes two parameters. One is mandatory and one is optional
@@ -173,24 +170,23 @@
 % Optional parameter is passed by using []
 % So the final paramaters will be like that []{}
 % Actually both parameters are optional but newcommand can have onle one optional parameter
-\newcommand{\itemizeCVBegin}[2][]{
-
+\newcommand{\itemizeCVBegin}[2][]{%
     % Sub Title is empty
     \ifthenelse{\equal{#2}{}}
-    {
+    {%
     % Sub Title is set
-    }{
-        \textbf{#2}
-    }
+    }{%
+        \textbf{#2}%
+    }%
 
     % Itemize without label
     \ifthenelse{\equal{#1}{nolabel}}
-    {
+    {%
         \begin{itemize}[leftmargin=0.15in, label={}]
     % Itemizes with default label 
-    }{
+    }{%
         \begin{itemize}
-    }
+    }%
 }
 \newcommand{\itemizeCVEnd}{\end{itemize}}
 
@@ -228,56 +224,4 @@
 
 % Select Mode
 \newcommand{\mymode}{academic}
-% \newcommand{\mym≥ode}{industry}
-
-%-------------------------------------------
-%%%%%%%%%%%%%%  RESUME START  %%%%%%%%%%%%%%
-\begin{document}
-
-\ifthenelse{\equal{\mymode}{academic}}
-{% True case
-    \input{sections/0-header}
-    \input{sections/1-interests}
-    \input{sections/2-education}
-    \input{sections/3-employment}
-    \input{sections/4-publications}
-    \input{sections/5-funding}
-    \input{sections/6-teaching}
-    \input{sections/7-supervising}
-    \input{sections/8-service}
-    \input{sections/9-panels}
-    \input{sections/10-events}
-    \input{sections/11-certificates}
-}
-{% False case
-    \ifthenelse{\equal{\mymode}{industry}}
-    {
-        \input{sections/0-header}
-        \input{sections/1-interests}
-        \input{sections/2-education}
-        \input{sections/3-employment}
-        \input{sections/4-publications}
-        \input{sections/6-teaching}
-        \input{sections/7-supervising}
-        \input{sections/8-service}
-        \input{sections/9-panels}
-        \input{sections/10-events}
-        \input{sections/11-certificates}
-    }
-    {% False case
-    }
-}
-
-%---A NEW SECTION DEVELOPMENT TEMPLATE ------
-
-% \section{Section Name}
-%   \vspace{3pt}
-%   \resumeSectionListStart
-%         \titleYearOrgCity
-%             \resumeItemListStart
-%                 \resumeItem{}
-%             \small{ \item{ \textbf{ {} }}
-%     \resumeSectionListEnd
-
-%-------------------------------------------
-\end{document}
+% \newcommand{\mymode}{industry}

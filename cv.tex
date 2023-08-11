@@ -1,0 +1,66 @@
+%-------------------------
+% Academistrial Resume Template
+% Author: Emre Süren
+% Credit: Inspired by many CV templates on GitHub
+%------------------------
+
+% \documentclass[letterpaper,11pt]{article}
+\documentclass{cv}
+
+%-------------------------------------------
+%%%%%%%%%%%%%%  RESUME START  %%%%%%%%%%%%%%
+\begin{document}
+
+\ifthenelse{\equal{\mymode}{academic}}
+{% True case
+    \input{sections/0-header}
+    \input{sections/1-interests}
+    \input{sections/2-education}
+    \input{sections/3-employment}
+    \input{sections/4-publications}
+    % \input{sections/5-funding}
+    \input{sections/6-teaching}
+    \input{sections/7-supervising}
+    \input{sections/8-service}
+    \input{sections/9-panels}
+    \input{sections/10-events}
+    \input{sections/11-certificates}
+}
+{% False case
+    \ifthenelse{\equal{\mymode}{industry}}
+    {
+        \input{sections/0-header}
+        \input{sections/1-interests}
+        \input{sections/2-education}
+        \input{sections/3-employment}
+        \input{sections/4-publications}
+        \input{sections/6-teaching}
+        \input{sections/7-supervising}
+        \input{sections/8-service}
+        \input{sections/9-panels}
+        \input{sections/10-events}
+        \input{sections/11-certificates}
+    }
+    {% False case
+    }
+}
+
+%---A NEW SECTION DEVELOPMENT TEMPLATE ------
+
+% \section{Section Name}
+%   \vspace{3pt}
+%   \resumeSectionListStart
+%         \titleYearOrgCity
+%             \resumeItemListStart
+%                 \resumeItem{}
+%             \small{ \item{ \textbf{ {} }}
+%     \resumeSectionListEnd
+
+%-------------------------------------------
+\end{document}
+
+% @TODO
+% languages.tex
+% strengths.tex
+% Publication summary
+% Funding summarys
