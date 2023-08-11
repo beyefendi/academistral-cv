@@ -100,7 +100,7 @@
 }
 
 % #1: Title #2: Link #3: Year #4: Role # Place
-\newcommand{\titleLinkYearRolePlace}[5]{%
+\newcommand{\cvItem}[5]{%
     %\vspace{-2pt}
     \item
     \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
@@ -110,8 +110,8 @@
 }
 
 
-% #1: (Bold) Title #2: Year #3: Organization #4: Link #5: Place
-\newcommand{\bTitleYearOrgLinkPlace}[5]{%
+% #1: (Bold) Title #2: Link #3: Year #4: Organization #5: Place
+\newcommand{\educationItem}[5]{%
     %\vspace{-2pt}
     \item
     \begin{tabular*}{0.97\linewidth}[t]{l@{\extracolsep{\fill}}r}
