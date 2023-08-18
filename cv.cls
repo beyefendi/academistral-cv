@@ -20,6 +20,8 @@
 
 \usepackage{soul} % Text underline while wrapping text
 \usepackage{ifthen}
+\usepackage{forloop}
+% \usepackage{tikz} % Math
 
 %---------- FONT OPTIONS ----------
 % sans-serif
@@ -68,6 +70,9 @@
 \pdfgentounicode=1
 
 %---------- CUSTOM COMMANDS FOR SECTIONS ----------
+% Select Mode
+% \newcommand{\mymode}{academic}
+\newcommand{\mymode}{industry}
 
 \newcommand{\isEmptyLink}[1]{%
     \ifthenelse{ \equal{#1}{} }
@@ -164,6 +169,23 @@
     \quad%
 }
 
+% #1: Name #2: Title #3: E-mail #4: Organization 
+\newcommand{\languageItem}[2]{%
+    \vspace{-2pt}
+    \begin{tabular}{0.97\textwidth}
+        \newcounter{x}
+        #1
+        \forloop{x}{0}{\value{x} < #2}{ % value of x is 1...9
+            \faCircle                  % print x in arabic notation
+        }
+        % \newcounter{x}
+        \forloop{x}{0}{\value{x} < \pgfmathparse{int(5+-#2)}}{ % 
+            \faCircleO                  % print x in arabic notation
+        }
+    \end{tabular}%\vspace{0pt}%
+    \quad%
+}
+
 % Takes two parameters. One is mandatory and one is optional
 % Optional is the first one and its value is <empty>
 % #1 is Label type and #2 is Sub Title
@@ -222,6 +244,3 @@
 
 % Latex bullet symbol: \item[\ding{94}]
 
-% Select Mode
-\newcommand{\mymode}{academic}
-% \newcommand{\mymode}{industry}
